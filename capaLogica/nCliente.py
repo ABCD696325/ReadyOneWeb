@@ -15,7 +15,14 @@ class LClientes:
         """
         Registra un nuevo cliente/pasajero
         """
+        if not dni.isdigit():
+            raise ValueError("DNI inválido: solo números")
+
+        if not telefono.isdigit():
+            raise ValueError("Teléfono inválido: solo números")
+
         return self.__dCliente.nuevoCliente(nombre, dni, telefono)
+
 
     def actualizarCliente(self, idcliente, nombre, dni, telefono):
         """

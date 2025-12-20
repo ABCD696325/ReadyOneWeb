@@ -88,17 +88,46 @@ class PClientes:
 
     def nuevoCliente(self, nombre, dni, telefono):
         try:
+            if not self._solo_numeros(dni):
+                st.error("El DNI solo debe contener números")
+                return
+
+            if not self._solo_numeros(telefono):
+                st.error("El teléfono solo debe contener números")
+                return
+
+            if len(dni) != 8:
+                st.error("El DNI debe tener 8 dígitos")
+                return
+
+            if len(telefono) != 9:
+                st.error("El teléfono debe tener 9 dígitos")
+                return
+
             self.__nCliente.nuevoCliente(nombre, dni, telefono)
             st.success('Cliente registrado correctamente')
             self.limpiar()
+
         except Exception as e:
             st.error(str(e))
 
+    def _solo_numeros(self, texto):
+        return texto.isdigit()
+
     def actualizarCliente(self, idcliente, nombre, dni, telefono):
         try:
+            if not dni.isdigit():
+                st.error("El DNI solo debe contener números")
+                return
+
+            if not telefono.isdigit():
+                st.error("El teléfono solo debe contener números")
+                return
+
             self.__nCliente.actualizarCliente(idcliente, nombre, dni, telefono)
             st.success('Cliente actualizado correctamente')
             self.limpiar()
+
         except Exception as e:
             st.error(str(e))
 
